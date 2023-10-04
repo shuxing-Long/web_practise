@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件的基本使用</title>
+    <link rel="shortcut icon" href="../favicon.ico">
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <style>
+        *{
+            margin-top: 20px;
+        }
+        .demo1{
+            height: 50px;
+            background-color: skyblue;
+        }
+    </style>
+</head>
+<body>
+    <!--
+        Vue中的事件修饰符：
+            1.prevent: 阻止默认事件（常用）；
+            2.stop：阻止事件冒泡（常用）；
+            3.once: 事件只触发一次（常用）；
+            4.capture: 使用事件的捕获模式；
+            5.self: 只有event.target是当前操作的元素是才触发事件；
+            6.passive: 事件的默认行为立刻执行，无需等待事件回调执行完毕(可以判断滚轮滚动)；
+    -->
+    <div id="root">
+        <h2>学校名称:{{name}}</h2>
+        <!-- 阻止默认事件 -->
+        <a href="http://atguigu.com" @click.prevent="showInfo">阻止默认事件</a>
+        <div class="demo1" @click="showInfo">
+            <!-- 阻止事件冒泡 -->
+            <button  @click.stop="showInfo">阻止事件冒泡</button>
+        </div>
+
+        <!-- 事件只触发一次 -->
+        <button  @click.once="showInfo">事件只触发一次</button>
+        <br/>
+        <!-- 使用事件的捕获模式 -->
+        <button  @click.capture="showInfo">使用事件的捕获模式</button>
+    </div>
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false
+
+        const vm = new Vue({
+            el:'#root',
+            data:{
+                name:'哈哈哈',
+                addr:'阿斯顿'
+            },
+            methods: {
+                showInfo(e){
+                    alert('哈哈哈')
+                }
+            }
+        })
+</script>
+</body>
+</html>

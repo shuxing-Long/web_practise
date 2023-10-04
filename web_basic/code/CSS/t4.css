@@ -1,0 +1,23 @@
+/* 后代选择器 */
+div p{
+    color: red;
+}
+
+/* 子代选择器 */
+div > p{
+    color: aqua;
+}
+
+/* 并集选择器 */
+div,p{
+    color: blue;
+}
+
+/* 交集选择器 */
+p.box{
+    color: aquamarine;
+}
+
+#wl:hover{
+    color: red;
+}

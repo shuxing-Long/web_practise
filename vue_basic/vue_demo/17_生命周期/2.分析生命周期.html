@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>分析生命周期</title>
+    <link rel="shortcut icon" href="../favicon.ico">
+    <script src="../js/dayjs.min.js"></script>
+    <script type="text/javascript" src="../js/vue.js"></script>
+
+</head>
+<body>
+   <!-- 
+        Vue.js 中的数据代理、数据监测和数据劫持是实现数据绑定和响应式的关键概念，它们有以下区别：
+
+            数据代理（Data Proxy）：Vue.js 使用 Object.defineProperty 方法将组件的 data 对象中的属性代理到组件实例上。
+            这意味着可以通过组件实例直接访问和修改 data 对象中的属性，而不需要通过访问 data 对象本身。数据代理实现了属性
+            的透明访问，使得我们可以像访问普通属性一样访问响应式数据。
+
+            数据监测（Data Observation）：Vue.js 使用依赖追踪和观察者模式来实现数据监测。当组件渲染时，Vue.js会对模板中
+            使用到的响应式数据进行依赖追踪，在模板中的每个数据属性都会有一个对应的观察者对象。当响应式数据发生变化时，观察
+            者对象会通知相关的依赖进行更新，从而实现了数据的自动更新。
+
+            数据劫持（Data Hijacking）：Vue.js 使用数据劫持来拦截对响应式数据的访问和修改。在组件初始化时，Vue.js会通过
+            递归地遍历 data 对象中的属性，使用 Object.defineProperty方法将这些属性转化为 getter 和 setter。当对响应式
+            数据的属性进行访问和修改时，会触发相应的 getter 和 setter，从而实现对数据的拦截和监听。通过数据劫持，Vue.js
+            可以捕获对响应式数据的访问和修改，并触发相应的依赖更新。
+
+            综上所述，数据代理使得访问和修改响应式数据更加方便和简洁，数据监测确保在数据发生变化时，相关的依赖和视图能够自
+            动更新，数据劫持则实现了对响应式数据的拦截和监听。这些机制共同作用，使得 Vue.js 实现了高效的数据绑定和响应式
+            更新。
+    -->
+    <div id="root">
+        <h2>当前值:{{n}}</h2>
+        <button @click="add">n+1</button>
+        <button @click="bye">销毁vm</button>
+    </div>
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false
+        
+        const vm = new Vue({
+            el:'#root',
+            data:{
+                n:1,
+            },
+            // template:`
+            //     <div>
+            //         <h2>当前值:{{n}}</h2>
+            //         <button @click="add">n+1</button>
+            //     </div>
+            // `,
+            methods: {
+                add(){
+                    console.log('add')
+                    this.n++
+                },
+                bye(){
+                    console.log('bye')
+                    // 销毁vm
+                    this.$destroy()
+                }
+            },
+            beforeCreate() {
+                console.log(this)
+                // debugger
+            },
+            created() {
+                console.log(this)
+            },
+            beforeMount() {
+                console.log(this)
+            },
+            mounted() {
+                console.log('mounted',this.$el instanceof HTMLElement)
+            },
+            beforeUpdate() {
+                console.log(this)
+            },
+            updated() {
+                console.log(this)
+            },
+            beforeDestroy() {
+                console.log(this)
+            },
+            destroyed() {
+                console.log(this)
+            },
+        })
+        
+        
+    </script>
+</body>
+</html>

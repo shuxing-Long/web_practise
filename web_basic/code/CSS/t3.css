@@ -1,0 +1,28 @@
+div {
+    width: 1000px;
+    height: 400px;
+    /* background-color: pink; */
+    /* background-image: url(图片地址); */
+    /* background-repeat: repeat;  背景平铺*/
+    /* background-position: center center; 背景位置*/
+    margin: 0 auto;    
+}
+hr{
+    color: black;
+}
+.suojin{
+    text-indent: 2em;
+}
+
+/* 字体居中 */
+.center {
+    text-align: center;
+}
+/* 字体灰色 */
+.color-gray{
+    color: gray;
+}
+/* 字体淡蓝色 */
+.color-nattierBlue{
+    color: #87ceeb;
+}

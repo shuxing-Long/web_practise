@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5.一个重要的内置关系</title>
+    <link rel="shortcut icon" href="../favicon.ico">
+    <script src="../js/dayjs.min.js"></script>
+    <script type="text/javascript" src="../js/vue.js"></script>
+
+</head>
+<body>
+    <!-- 
+        1.一个重要的内置关系:VueComponent.prototype._proto_ === Vue.prototype
+        2.为什么要有这个关系:让组件实例对象（vc）可以访问到Vue原型上的属性、方法。
+
+        实例的隐式原型属性，永远指向自己缔造者的原型对象
+     -->
+    <div id="root">
+        <student></student>
+        
+    </div>
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false
+        Vue.prototype.x=99
+        //第一步：创建student组件
+        const student = Vue.extend({
+            template:`
+            <div>
+                <h2>学校名称: {{name}}</h2>
+                <h2>地址: {{age}}</h2>
+                <button @click="dianji">点击</button>
+            </div>
+            `,
+            name:'atguigu',
+            data(){
+                return {
+                    name:'asd',
+                    age:18
+                }
+            },
+            methods: {
+                dianji(){
+                    console.log(this)
+                    console.log(this.x)
+                }
+            },
+        })
+
+        new Vue({
+            el:'#root',
+            components:{
+                
+                student
+            }
+        })
+    </script>
+</body>
+</html>

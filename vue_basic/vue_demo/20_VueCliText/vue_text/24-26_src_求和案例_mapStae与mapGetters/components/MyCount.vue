@@ -1,0 +1,92 @@
+<template>
+  <div >
+    <h1>当前求和为:{{sum}}</h1>
+    <h1>当前求和放大10倍后为:{{bigSum}}</h1>
+    <h1>我再{{school}},学习{{subject}}</h1>
+    <select v-model.number="n">
+        <option :value="1">1</option>
+        <option :value="2">2</option>
+        <option :value="3">3</option>
+    </select>
+    <button @click="increment">+</button>
+    <button @click="decrement">-</button>
+    <button @click="incrementOdd">当前求和为奇数再加</button>
+    <button @click="incrementWait">等一等再加</button>
+  </div>
+</template>
+
+<script>
+    import { mapState,mapGetters, mapActions, mapMutations } from 'vuex'
+    export default {
+        name:'MyCount',
+        data() {
+            return {
+                n : 1,
+                
+            }
+        },
+        computed:{
+            // 可以使用对象的方式给映射的方法设置别名
+            // ...mapState({sum:'sum',school:'school',subject:'subject'}),
+            ...mapState(['sum','school','subject']),
+
+            // 可以使用对象的方式给映射的方法设置别名
+            // ...mapGetters({bigSum:'bigSum'}),
+            ...mapGetters(['bigSum']),
+
+            // sum(){
+            //     return this.$store.state.sum
+            // },
+            // school(){
+            //     return this.$store.state.school
+            // },
+            // subject(){
+            //     return this.$store.state.subject
+            // },
+
+            // bigSum(){
+            //     return this.$store.getters.bigSum
+            // },
+        },
+        methods: {
+            increment(){
+                this.$store.commit('PLUS',this.n)
+            },
+            decrement(){
+                this.$store.commit('SUBTRACT',this.n)
+            },
+            incrementOdd(){
+                
+                this.$store.dispatch('plusOdd',this.n)
+            },
+            incrementWait(){
+                
+                this.$store.dispatch('plusWait',this.n)
+            }
+        },
+        mounted() {
+            console.log(this.$store)
+        },
+    }
+</script>
+
+<style>
+    .category{
+        background-color: skyblue;
+        width: 200px;
+        height: 300px;
+    }
+    h3{
+        text-align: center;
+        background-color: orange;
+    }
+    video{
+        width: 100%;
+    }
+    img{
+        width: 100%;
+    }
+    button{
+        margin-left: 10px;
+    }
+</style>

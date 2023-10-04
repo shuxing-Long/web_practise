@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>初识vue</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h1>Hello,{{name}}，年龄:{{age}}，时间：{{Date.now()}}</h1>
+        
+    </div>
+    <!--
+        1.想让vue工作，就必须创建一个Vue实例，并要传入一个配置对象；
+        2.root容器里的代码依然符合html规范，只不过混入了一些特殊的Vue语法；
+        3.root容器里的代码被称为ie【Vue模板】
+        4.注意区分：js表达式 和 js代码
+        5.Vue实例和容器是一一对应的；
+        6.真实开发中具有一个Vue实例，并且会配合着主键一起使用；
+        7.{{xxx}}中的xxx要写js表达式，且xxx可以自动读取data中的所有属性；
+        8.一旦data中的数据发生改变，那么模板中用到该数据的地方也会自动改变；
+    -->
+    <script type="text/javascript">
+        Vue.config.productionTip = false //设置为 false 以阻止 vue 在启动时生成生产提示。
+        const x = new Vue({
+            el:'#root',
+            data:{
+                name:'嘿嘿嘿',
+                age:'12'
+            }
+        })
+    </script>
+</body>
+</html>

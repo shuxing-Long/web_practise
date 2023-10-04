@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sessionStorage</title>
+</head>
+<body>
+    <h2>localStorage</h2>
+    <button onclick="saveDate()">保存数据</button>
+    <button onclick="readDate()">读取数据</button>
+    <button onclick="delDate()">删除数据</button>
+    <button onclick="delAllDate()">删除全部数据</button>
+    <script type="text/javascript">
+        function saveDate(){
+            window.sessionStorage.setItem('msg','hello')
+            window.sessionStorage.setItem('msg2',666)
+
+            let p ={name:'张三',age:19}
+            window.sessionStorage.setItem('user',JSON.stringify(p))
+        }
+        function readDate(){
+            console.log(window.sessionStorage.getItem('msg')) 
+            console.log(window.sessionStorage.getItem('msg2'))
+            console.log(JSON.parse(sessionStorage.getItem('user'))) 
+        }
+        function delDate(){
+            window.sessionStorage.removeItem('msg2')
+        
+        }
+        function delAllDate(){
+            window.sessionStorage.clear()
+        
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>引出生命周期</title>
+    <link rel="shortcut icon" href="../favicon.ico">
+    <script src="../js/dayjs.min.js"></script>
+    <script type="text/javascript" src="../js/vue.js"></script>
+
+</head>
+<body>
+    
+    <!-- 
+        Vue.js的生命周期包括以下几个阶段：
+
+        创建阶段（Creation Phase）：
+
+        beforeCreate：在实例初始化之后，数据观测 (data observer) 和事件配置 (event/watcher setup) 之前调用，此时 Vue 实例的选项 (options) 对象已经被处理成可响应的数据 (reactive data)，但是真实 DOM 还没有被创建。
+        created：实例已经完成数据观测、属性和方法的运算，但是真实 DOM 还没有被创建，$el 属性尚不可用。
+        挂载阶段（Mounting Phase）：
+
+        beforeMount：在模板编译或者使用 render 函数渲染之后，但是在将编译好的模板或者 render 函数的结果挂载到真实 DOM 之前被调用。
+        mounted：将编译好的模板或者 render 函数的结果挂载到真实 DOM 之后被调用。
+        更新阶段（Updating Phase）：
+
+        beforeUpdate：在响应式数据发生变化、虚拟 DOM 重新渲染之前被调用。
+        updated：在响应式数据发生变化、虚拟 DOM 重新渲染之后被调用。
+        销毁阶段（Destruction Phase）：
+
+        beforeDestroy：在 Vue 实例销毁之前调用。此时实例仍然完全可用。
+        destroyed：在 Vue 实例销毁之后调用。调用后，Vue 实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁。
+        这些生命周期钩子函数可以通过在 Vue 组件中定义相应的方法来使用，以便在不同阶段执行特定的逻辑操作。
+
+
+
+        生命周期:
+            1.又名:生命周期回调函数、生命周期函数、生命周期钩子。
+            2.是什么:Vue在关键时刻帮我们调用的一些特殊名称的函数。
+            3.生命周期函数的名字不可更改，但函数的具体内容是程序员根据需求编写的。
+            4.生命周期函数中的this指向是vm或组件实例对象。
+     -->
+    <div id="root">
+        <h2 :style="{opacity}">欢迎学习Vue</h2>
+        
+    </div>
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false
+        
+        const vm = new Vue({
+            el:'#root',
+            data:{
+                opacity:1,
+            },
+            methods: {
+
+            },
+            // Vue完成模板的解析并把初始的真实DOM元素放入页面后(挂载完毕)调用mounted
+            mounted() {
+                setInterval(()=>{
+                            this.opacity -= 0.01
+                            if(this.opacity <= 0) this.opacity = 1
+                        },16)
+            },
+        })
+
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>列表过滤</title>
+    <link rel="shortcut icon" href="../favicon.ico">
+    <script type="text/javascript" src="../js/vue.js"></script>
+
+</head>
+<body>
+
+    <div id="root">
+        <h2>人员列表</h2>
+        <input type="text" placeholder="请输入名称" v-model="keyWord">
+        <ul>
+            <li v-for="(person,index) in filPerons" :key="person.id">
+                {{index}}-{{person.name}}-{{person.age}}
+            </li>
+        </ul>
+
+    </div>
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false
+        // 用watch实现
+        // #region
+        // const vm = new Vue({
+        //     el:'#root',
+        //     data:{
+        //         keyWord:'',
+        //         persons:[
+        //             {id:'001',name:'张三',age:18},
+        //             {id:'002',name:'李四',age:18},
+        //             {id:'003',name:'王五',age:18},
+        //         ],
+        //         filPerons:[],
+        //         car:{
+        //             name:'哈哈哈',
+        //             price:'123',
+        //             color:'黑色'
+        //         },
+        //         str:'asdasd',
+        //     },
+        //     watch:{
+        //         keyWord:{
+        //             immediate:true,
+        //             handler(val){
+        //                 // 过滤数据
+        //                 this.filPerons = this.persons.filter((p)=>{
+        //                     return p.name.indexOf(val) !== -1
+        //                 })
+        //             }
+                   
+        //         }
+        //     }
+        // })
+        //#endregion
+
+
+        // 用computed实现
+        const vm = new Vue({
+            el:'#root',
+            data:{
+                keyWord:'',
+                persons:[
+                    {id:'001',name:'张三',age:18},
+                    {id:'002',name:'李四',age:18},
+                    {id:'003',name:'王五',age:18},
+                ],
+            },
+            computed:{
+                filPerons(){
+                    return this.persons.filter((p)=>{
+                        return p.name.indexOf(this.keyWord) !== -1
+                    })
+                }
+            }
+        })
+</script>
+</body>
+</html>

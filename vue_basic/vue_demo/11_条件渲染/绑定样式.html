@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>天气案例_监视属性</title>
+    <link rel="shortcut icon" href="../favicon.ico">
+    <script type="text/javascript" src="../js/vue.js"></script>
+
+</head>
+<body>
+    <!-- 
+        条件渲染
+        1.v-if
+            写法:
+                (1).v-if="表达式"
+                (2).v-else-if="表达式"
+                (3).v-else="表达式"
+            适用于：切换频率较低的场景。
+            特点：不展示的DOM元素直接被移除。
+            注意：v-if可以和:v-else-if、v-else一起使用，但要求结构不能被“打断”。
+        
+        2.v-show
+            写法：v-show="表达式"
+            适用于：切换频率较高的场景。
+            特点：不展示的DOM元素未被移除，仅仅是使用样式隐藏掉。
+
+        3.备注：使用v-if的时候，元素可能无法获取到，而使用v-show一定可以获取到。
+     -->
+    <div id="root">
+        <!--  频率高时用 -->
+        <h2 v-show="isShow">哈哈哈哈</h2>
+        <!-- <h2 v-show="true">哈哈哈哈</h2> -->
+        <!-- <h2 v-show="1 === 1">哈哈哈哈</h2> -->
+
+        <hr/>
+        <!-- 频率低时用 -->
+        <h2 v-if="isShow">哈哈哈哈</h2>
+        <!-- <h2 v-if="true">哈哈哈哈</h2> -->
+        <!-- <h2 v-if="1 === 1">哈哈哈哈</h2> -->
+
+        <hr/>
+
+        <button @click="n++">a+1</button>
+        <h2 v-if="n === 1">11111</h2>
+        <h2 v-else-if="n === 2">22222</h2>
+        <h2 v-else-if="n === 3">33333</h2>
+        <h2 v-else="n === 4">44444</h2>
+
+        <hr/>
+        <!-- template不影响结构,只能和v-if一起使用 -->
+        <template v-if="n === 1">
+            <h2>11111</h2>
+            <h2>22222</h2>
+            <h2>33333</h2>
+            <h2>44444</h2>
+        </template>
+
+    </div>
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false
+
+        const vm = new Vue({
+            el:'#root',
+            data:{
+                isShow:true,
+                n:0,
+            },
+
+        })
+</script>
+</body>
+</html>
